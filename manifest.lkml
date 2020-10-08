@@ -6,11 +6,11 @@ constant: CONFIG_PROJECT_NAME {
 }
 
 constant: CONNECTION_NAME {
-  value: "botify-uhnd"
+  value: "uhnd-botify-demo"
   export: override_optional
 }
 
 constant: SCHEMA_NAME {
-  value: "uhnd_exports"
+  value: "uhnd_crawls_for_looker_demo"
   export: override_optional
 }

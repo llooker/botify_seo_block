@@ -131,6 +131,192 @@
     col: 4
     width: 20
     height: 3
+  - title: Crawl History
+    name: Crawl History
+    model: looker_botify
+    explore: export
+    type: looker_grid
+    fields: [export.partition_date, export.count, export.sum_no__of_crawls_from_google__logs_,
+      export.sum_no__of_crawls_from_bing__logs_, export.sum_no__of_visits_from_organic_providers]
+    filters: {}
+    sorts: [export.partition_date desc]
+    limit: 500
+    show_view_names: false
+    show_row_numbers: false
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: 5b121cce-cf79-457c-a52a-9162dc174766
+      palette_id: 55dee055-18cf-4472-9669-469322a6f264
+    truncate_column_names: false
+    series_labels:
+      export.partition_date: Crawl Date
+      export.count: URLs
+      export.sum_no__of_crawls_from_google__logs_: Crawls from Google
+      export.sum_no__of_crawls_from_bing__logs_: Crawls from Bing
+      export.sum_no__of_visits_from_organic_providers: Organic Visits
+    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#462C9D",
+        font_color: !!null '', color_application: {collection_id: 5b121cce-cf79-457c-a52a-9162dc174766,
+          palette_id: 12809dc5-ac61-4801-8878-10c61fb43c60}, bold: false, italic: false,
+        strikethrough: false, fields: [export.sum_no__of_visits_from_organic_providers]}]
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Crawl Date: export.partition_date
+      Pagetype: export.pagetype
+    row: 29
+    col: 0
+    width: 24
+    height: 6
+  - title: Non Compliant URL Trend
+    name: Non Compliant URL Trend
+    model: looker_botify
+    explore: export
+    type: looker_line
+    fields: [export.count, export.partition_date]
+    filters:
+      export.is_compliant: 'No'
+    sorts: [export.count desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle_outline
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    y_axes: [{label: Non Compliant URLs, orientation: left, series: [{axisId: export.count,
+            id: export.count, name: Count}], showLabels: true, showValues: true, maxValue: !!null '',
+        minValue: !!null '', unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}]
+    x_axis_label: Date
+    limit_displayed_rows_values:
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+    label_value_format: '0.0'
+    series_types: {}
+    series_colors:
+      export.avg_delay_total: "#9174F0"
+      export.count: "#592EC2"
+    series_labels:
+      export.count: Count
+    ordering: none
+    show_null_labels: false
+    show_dropoff: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    listen:
+      Crawl Date: export.partition_date
+      Pagetype: export.pagetype
+    row: 16
+    col: 0
+    width: 12
+    height: 7
+  - title: Average HTML Load Time vs Google Crawls
+    name: Average HTML Load Time vs Google Crawls
+    model: looker_botify
+    explore: export
+    type: looker_line
+    fields: [export.partition_date, export.google_crawls_range, export.count, export.avg_delay_first_byte_received]
+    pivots: [export.google_crawls_range]
+    filters:
+      export.google_crawls_range: 1 or Above
+    sorts: [export.partition_date, export.google_crawls_range 0]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle_outline
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: ordinal
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      palette_id: ccba75a3-58c7-4b9c-a931-4ffc59e79cba
+      options:
+        steps: 5
+    y_axes: [{label: '', orientation: left, series: [{axisId: export.avg_delay_total,
+            id: 1 or Above - 1 - export.avg_delay_total, name: Average HTML Load Time}],
+        showLabels: true, showValues: true, maxValue: 2250, minValue: 1250, valueFormat: "#,##0\\\
+          m\\s", unpinAxis: false, tickDensity: default, type: linear}, {label: '',
+        orientation: right, series: [{axisId: export.count, id: 1 or Above - 1 - export.count,
+            name: URLs Crawled by Google}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, type: linear}]
+    x_axis_label: Date
+    label_value_format: '0.0'
+    series_types:
+      export.count: column
+      1 or Above - 1 - export.count: column
+    series_colors:
+      1 or Above - 1 - export.avg_delay_total: "#9174F0"
+      1 or Above - 1 - export.count: "#ffe87a"
+    series_labels:
+      export.count: Count
+      1 or Above - 1 - export.count: URLs Crawled by Google
+      1 or Above - 1 - export.avg_delay_total: Average HTML Load Time
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    listen:
+      Crawl Date: export.partition_date
+      Pagetype: export.pagetype
+    row: 23
+    col: 12
+    width: 12
+    height: 6
   - title: Total Revenue & Revenue Per Visit
     name: Total Revenue & Revenue Per Visit
     model: looker_botify
@@ -138,8 +324,7 @@
     type: looker_area
     fields: [export.sum_estimated_revenue_from_organic_providers, export.partition_date,
       export.sum_no__of_visits_from_organic_providers]
-    filters:
-      export.partition_date: '2019'
+    filters: {}
     sorts: [export.sum_estimated_revenue_from_organic_providers desc]
     limit: 500
     dynamic_fields: [{table_calculation: average_revenue_per_visit, label: Average
@@ -163,7 +348,7 @@
     stacking: ''
     limit_displayed_rows: false
     legend_position: center
-    point_style: none
+    point_style: circle_outline
     show_value_labels: false
     label_density: 25
     x_axis_scale: auto
@@ -181,10 +366,12 @@
               Revenue Per Visit}], showLabels: true, showValues: true, unpinAxis: true,
         tickDensity: default, type: linear}]
     x_axis_label: Date
+    hidden_series: []
     label_value_format: "$0"
     series_types:
       export.sum_no__of_visits_from_organic_providers: line
       export.sum_estimated_revenue_from_organic_providers: line
+      average_revenue_per_visit: column
     series_colors:
       export.sum_no__of_visits_from_organic_providers: "#FFB101"
       average_revenue_per_visit: "#a83aee"
@@ -194,11 +381,197 @@
       export.sum_no__of_visits_from_organic_providers: Visits from Organic Providers
     hidden_fields: [export.sum_no__of_visits_from_organic_providers]
     defaults_version: 1
-    listen: {}
+    listen:
+      Crawl Date: export.partition_date
+      Pagetype: export.pagetype
     row: 3
     col: 0
     width: 12
     height: 6
+  - title: Crawl Ratio Over Time
+    name: Crawl Ratio Over Time
+    model: looker_botify
+    explore: export
+    type: looker_area
+    fields: [export.partition_date, export.count, export.google_crawls_range]
+    pivots: [export.google_crawls_range]
+    fill_fields: [export.google_crawls_range]
+    filters: {}
+    sorts: [export.partition_date desc, export.google_crawls_range desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: percent
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle_outline
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: URLs, orientation: left, series: [{axisId: Below 1 - 0 - export.count,
+            id: Below 1 - 0 - export.count, name: Not Crawled}, {axisId: 1 or Above
+              - 1 - export.count, id: 1 or Above - 1 - export.count, name: Crawled}],
+        showLabels: true, showValues: true, valueFormat: '', unpinAxis: false, tickDensity: default,
+        type: linear}]
+    x_axis_label: Date
+    label_value_format: ''
+    series_types: {}
+    series_colors:
+      Below 1 - 0 - export.count: "#988bc2"
+      1 or Above - 1 - export.count: "#592EC2"
+    series_labels:
+      Below 1 - 0 - export.count: Not Crawled
+      1 or Above - 1 - export.count: Crawled
+    hidden_fields: []
+    defaults_version: 1
+    listen:
+      Crawl Date: export.partition_date
+      Pagetype: export.pagetype
+    row: 23
+    col: 0
+    width: 12
+    height: 6
+  - title: Active Pages Ratio
+    name: Active Pages Ratio
+    model: looker_botify
+    explore: export
+    type: looker_area
+    fields: [export.count, export.partition_date, export.organic_visits_range]
+    pivots: [export.organic_visits_range]
+    fill_fields: [export.organic_visits_range]
+    filters: {}
+    sorts: [export.partition_date desc, export.organic_visits_range desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: percent
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle_outline
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: URLs, orientation: left, series: [{axisId: Below 1 - 0 - export.count,
+            id: Below 1 - 0 - export.count, name: Not Crawled}, {axisId: 1 or Above
+              - 1 - export.count, id: 1 or Above - 1 - export.count, name: Crawled}],
+        showLabels: true, showValues: true, valueFormat: '', unpinAxis: false, tickDensity: default,
+        type: linear}]
+    x_axis_label: Date
+    label_value_format: ''
+    series_types: {}
+    series_colors:
+      Below 1 - 0 - export.count: "#9174F0"
+      1 or Above - 1 - export.count: "#FFD95F"
+    series_labels:
+      Below 1 - 0 - export.count: Not Active
+      1 or Above - 1 - export.count: Active
+    hidden_fields: []
+    defaults_version: 1
+    listen:
+      Crawl Date: export.partition_date
+      Pagetype: export.pagetype
+    row: 9
+    col: 12
+    width: 12
+    height: 7
+  - title: Visits Over Time
+    name: Visits Over Time
+    model: looker_botify
+    explore: export
+    type: looker_line
+    fields: [export.partition_date, export.sum_no__of_visits_from_organic_providers]
+    filters: {}
+    sorts: [export.partition_date desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: normal
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle_outline
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: monotone
+    y_axes: [{label: URLs, orientation: left, series: [{axisId: export.sum_no__of_visits_from_organic_providers,
+            id: export.sum_no__of_visits_from_organic_providers, name: Sum No of Visits
+              From Organic Providers}], showLabels: true, showValues: true, maxValue: !!null '',
+        minValue: !!null '', valueFormat: '', unpinAxis: false, tickDensity: default,
+        type: linear}]
+    x_axis_label: Date
+    label_value_format: ''
+    series_types: {}
+    series_colors:
+      Below 1 - 0 - export.count: "#9174F0"
+      1 or Above - 1 - export.count: "#FFD95F"
+    series_labels:
+      Below 1 - 0 - export.count: Not Active
+      1 or Above - 1 - export.count: Active
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    hidden_fields: []
+    defaults_version: 1
+    listen:
+      Crawl Date: export.partition_date
+      Pagetype: export.pagetype
+    row: 9
+    col: 0
+    width: 12
+    height: 7
   - title: Revenue Contribution by Pagetype
     name: Revenue Contribution by Pagetype
     model: looker_botify
@@ -207,8 +580,7 @@
     fields: [export.partition_date, export.sum_estimated_revenue_from_organic_providers,
       export.pagetype]
     pivots: [export.pagetype]
-    filters:
-      export.partition_date: '2019'
+    filters: {}
     sorts: [export.partition_date, export.pagetype]
     limit: 500
     column_limit: 50
@@ -308,383 +680,18 @@
     show_null_points: true
     interpolation: linear
     defaults_version: 1
-    listen: {}
+    listen:
+      Crawl Date: export.partition_date
+      Pagetype: export.pagetype
     row: 3
     col: 12
     width: 12
-    height: 6
-  - title: Visits Over Time
-    name: Visits Over Time
-    model: looker_botify
-    explore: export
-    type: looker_line
-    fields: [export.partition_date, export.sum_no__of_visits_from_organic_providers]
-    filters:
-      export.partition_date: '2019'
-    sorts: [export.partition_date desc]
-    limit: 500
-    query_timezone: America/Los_Angeles
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: normal
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    show_null_points: true
-    interpolation: linear
-    y_axes: [{label: URLs, orientation: left, series: [{axisId: export.sum_no__of_visits_from_organic_providers,
-            id: export.sum_no__of_visits_from_organic_providers, name: Sum No of Visits
-              From Organic Providers}], showLabels: true, showValues: true, maxValue: 170000,
-        minValue: 80000, valueFormat: '', unpinAxis: false, tickDensity: default,
-        type: linear}]
-    x_axis_label: Date
-    label_value_format: ''
-    series_types: {}
-    series_colors:
-      Below 1 - 0 - export.count: "#9174F0"
-      1 or Above - 1 - export.count: "#FFD95F"
-    series_labels:
-      Below 1 - 0 - export.count: Not Active
-      1 or Above - 1 - export.count: Active
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    hidden_fields: []
-    defaults_version: 1
-    listen: {}
-    row: 9
-    col: 0
-    width: 12
-    height: 7
-  - title: Active Pages Ratio
-    name: Active Pages Ratio
-    model: looker_botify
-    explore: export
-    type: looker_area
-    fields: [export.count, export.partition_date, export.organic_visits_range]
-    pivots: [export.organic_visits_range]
-    fill_fields: [export.organic_visits_range]
-    filters:
-      export.partition_date: '2019'
-    sorts: [export.partition_date desc, export.organic_visits_range desc]
-    limit: 500
-    query_timezone: America/Los_Angeles
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: percent
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    show_null_points: true
-    interpolation: linear
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    y_axes: [{label: URLs, orientation: left, series: [{axisId: Below 1 - 0 - export.count,
-            id: Below 1 - 0 - export.count, name: Not Crawled}, {axisId: 1 or Above
-              - 1 - export.count, id: 1 or Above - 1 - export.count, name: Crawled}],
-        showLabels: true, showValues: true, valueFormat: '', unpinAxis: false, tickDensity: default,
-        type: linear}]
-    x_axis_label: Date
-    label_value_format: ''
-    series_types: {}
-    series_colors:
-      Below 1 - 0 - export.count: "#9174F0"
-      1 or Above - 1 - export.count: "#FFD95F"
-    series_labels:
-      Below 1 - 0 - export.count: Not Active
-      1 or Above - 1 - export.count: Active
-    hidden_fields: []
-    defaults_version: 1
-    listen: {}
-    row: 9
-    col: 12
-    width: 12
-    height: 7
-  - title: Non Compliant URL Trend
-    name: Non Compliant URL Trend
-    model: looker_botify
-    explore: export
-    type: looker_line
-    fields: [export.count, export.partition_date]
-    filters:
-      export.is_compliant: 'No'
-    sorts: [export.count desc]
-    limit: 500
-    query_timezone: America/Los_Angeles
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    show_null_points: true
-    interpolation: linear
-    y_axes: [{label: Non Compliant URLs, orientation: left, series: [{axisId: export.count,
-            id: export.count, name: Count}], showLabels: true, showValues: true, maxValue: 500,
-        minValue: 250, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
-    x_axis_label: Date
-    limit_displayed_rows_values:
-      show_hide: hide
-      first_last: first
-      num_rows: 0
-    label_value_format: '0.0'
-    series_types: {}
-    series_colors:
-      export.avg_delay_total: "#9174F0"
-      export.count: "#592EC2"
-    series_labels:
-      export.count: Count
-    ordering: none
-    show_null_labels: false
-    show_dropoff: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    listen:
-      Crawl Date: export.partition_date
-      Pagetype: export.pagetype
-    row: 16
-    col: 0
-    width: 12
-    height: 7
-  - title: Crawl Ratio Over Time
-    name: Crawl Ratio Over Time
-    model: looker_botify
-    explore: export
-    type: looker_area
-    fields: [export.partition_date, export.count, export.google_crawls_range]
-    pivots: [export.google_crawls_range]
-    fill_fields: [export.google_crawls_range]
-    filters:
-      export.partition_date: '2019'
-    sorts: [export.partition_date desc, export.google_crawls_range desc]
-    limit: 500
-    query_timezone: America/Los_Angeles
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: percent
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    show_null_points: true
-    interpolation: linear
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    y_axes: [{label: URLs, orientation: left, series: [{axisId: Below 1 - 0 - export.count,
-            id: Below 1 - 0 - export.count, name: Not Crawled}, {axisId: 1 or Above
-              - 1 - export.count, id: 1 or Above - 1 - export.count, name: Crawled}],
-        showLabels: true, showValues: true, valueFormat: '', unpinAxis: false, tickDensity: default,
-        type: linear}]
-    x_axis_label: Date
-    label_value_format: ''
-    series_types: {}
-    series_colors:
-      Below 1 - 0 - export.count: "#988bc2"
-      1 or Above - 1 - export.count: "#592EC2"
-    series_labels:
-      Below 1 - 0 - export.count: Not Crawled
-      1 or Above - 1 - export.count: Crawled
-    hidden_fields: []
-    defaults_version: 1
-    listen: {}
-    row: 23
-    col: 0
-    width: 12
-    height: 6
-  - title: Average HTML Load Time vs Google Crawls
-    name: Average HTML Load Time vs Google Crawls
-    model: looker_botify
-    explore: export
-    type: looker_line
-    fields: [export.avg_delay_total, export.partition_date, export.google_crawls_range,
-      export.count]
-    pivots: [export.google_crawls_range]
-    filters:
-      export.google_crawls_range: 1 or Above
-    sorts: [export.partition_date, export.google_crawls_range 0]
-    limit: 500
-    query_timezone: America/Los_Angeles
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: circle_outline
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: ordinal
-    y_axis_combined: true
-    show_null_points: true
-    interpolation: linear
-    color_application:
-      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-      palette_id: ccba75a3-58c7-4b9c-a931-4ffc59e79cba
-      options:
-        steps: 5
-    y_axes: [{label: '', orientation: left, series: [{axisId: export.avg_delay_total,
-            id: 1 or Above - 1 - export.avg_delay_total, name: Average HTML Load Time}],
-        showLabels: true, showValues: true, maxValue: 2250, minValue: 1250, valueFormat: "#,##0\\\
-          m\\s", unpinAxis: false, tickDensity: default, type: linear}, {label: '',
-        orientation: right, series: [{axisId: export.count, id: 1 or Above - 1 - export.count,
-            name: URLs Crawled by Google}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, type: linear}]
-    x_axis_label: Date
-    label_value_format: '0.0'
-    series_types:
-      export.count: column
-      1 or Above - 1 - export.count: column
-    series_colors:
-      1 or Above - 1 - export.avg_delay_total: "#9174F0"
-      1 or Above - 1 - export.count: "#ffe87a"
-    series_labels:
-      export.count: Count
-      1 or Above - 1 - export.count: URLs Crawled by Google
-      1 or Above - 1 - export.avg_delay_total: Average HTML Load Time
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    listen:
-      Crawl Date: export.partition_date
-    row: 23
-    col: 12
-    width: 12
-    height: 6
-  - title: Crawl History
-    name: Crawl History
-    model: looker_botify
-    explore: export
-    type: looker_grid
-    fields: [export.partition_date, export.count, export.sum_no__of_crawls_from_google__logs_,
-      export.sum_no__of_crawls_from_bing__logs_, export.sum_no__of_visits_from_organic_providers]
-    filters:
-      export.partition_date: ''
-    sorts: [export.partition_date desc]
-    limit: 500
-    show_view_names: false
-    show_row_numbers: false
-    transpose: false
-    truncate_text: true
-    hide_totals: false
-    hide_row_totals: false
-    size_to_fit: true
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: true
-    header_text_alignment: left
-    header_font_size: 12
-    rows_font_size: 12
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    color_application:
-      collection_id: 5b121cce-cf79-457c-a52a-9162dc174766
-      palette_id: 55dee055-18cf-4472-9669-469322a6f264
-    truncate_column_names: false
-    series_labels:
-      export.partition_date: Crawl Date
-      export.count: URLs
-      export.sum_no__of_crawls_from_google__logs_: Crawls from Google
-      export.sum_no__of_crawls_from_bing__logs_: Crawls from Bing
-      export.sum_no__of_visits_from_organic_providers: Organic Visits
-    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#462C9D",
-        font_color: !!null '', color_application: {collection_id: 5b121cce-cf79-457c-a52a-9162dc174766,
-          palette_id: 12809dc5-ac61-4801-8878-10c61fb43c60}, bold: false, italic: false,
-        strikethrough: false, fields: [export.sum_no__of_visits_from_organic_providers]}]
-    series_types: {}
-    defaults_version: 1
-    listen:
-      Pagetype: export.pagetype
-    row: 29
-    col: 0
-    width: 24
     height: 6
   filters:
   - name: Crawl Date
     title: Crawl Date
     type: date_filter
-    default_value: '2019'
+    default_value: '2020'
     allow_multiple_values: true
     required: false
   - name: Pagetype
